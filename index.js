@@ -7,6 +7,8 @@ var app = express()
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
+app.use('/static', express.static('public'))
+
 app.get('/', function(req, res) {
   res.send('hello')
 })
