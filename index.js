@@ -44,7 +44,7 @@ app.use(function(err, req, res, next) {
 
 http.createServer(app).listen(80)
 https.createServer({
-  pfx: fs.readFileSync('./48156786.qcloud.la.pfx'),
-  // pfx: fs.readFileSync('./www.littlee.xyz.pfx'),
+  // pfx: fs.readFileSync('./48156786.qcloud.la.pfx'),
+  pfx: fs.readFileSync('./www.littlee.xyz.pfx'),
   passphrase: ''
 }, app).listen(443)
