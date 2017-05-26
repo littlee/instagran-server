@@ -2,6 +2,9 @@ var express = require('express')
 var bodyParser = require('body-parser')
 var superagent = require('superagent')
 var cheerio = require('cheerio')
+var http = require('http')
+var https = require('https')
+var fs = require('fs')
 var app = express()
 
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -34,6 +37,14 @@ app.post('/api/getimg', function(req, res) {
     })
 })
 
-app.listen(80, function() {
-  console.log('server running on localhost:80')
+app.use(function(err, req, res, next) {
+  console.error(err.stack)
+  res.status(500).send('500 Server Error')
 })
+
+http.createServer(app).listen(80)
+https.createServer({
+  pfx: fs.readFileSync('./48156786.qcloud.la.pfx'),
+  // pfx: fs.readFileSync('./www.littlee.xyz.pfx'),
+  passphrase: ''
+}, app).listen(443)
