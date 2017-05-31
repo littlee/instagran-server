@@ -25,6 +25,9 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
+
+
+*.pfx
 # Windows thumbnail cache files
 Thumbs.db
 ehthumbs.db
