@@ -50,7 +50,7 @@ https
   .createServer(
     {
       pfx: fs.readFileSync('./www.littlee.xyz.pfx'),
-      passphrase: ''
+      passphrase: fs.readFileSync('./pass.pass')
     },
     app
   )
