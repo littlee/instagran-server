@@ -13,7 +13,7 @@ app.use(bodyParser.json())
 app.use('/static', express.static('public'))
 
 app.get('/', function(req, res) {
-  res.send('hello')
+  res.send('instagran-server')
 })
 
 app.post('/api/getimg', function(req, res) {
@@ -28,7 +28,6 @@ app.post('/api/getimg', function(req, res) {
         throw err
       }
 
-
       var $ = cheerio.load(resp.text)
 
       res.json({
@@ -37,14 +36,22 @@ app.post('/api/getimg', function(req, res) {
     })
 })
 
+app.get('/info', function(req, res) {
+  res.send(require('./ddb/db.json'))
+})
+
 app.use(function(err, req, res, next) {
   console.error(err.stack)
   res.status(500).send('500 Server Error')
 })
 
 http.createServer(app).listen(80)
-https.createServer({
-  // pfx: fs.readFileSync('./48156786.qcloud.la.pfx'),
-  pfx: fs.readFileSync('./www.littlee.xyz.pfx'),
-  passphrase: ''
-}, app).listen(443)
+https
+  .createServer(
+    {
+      pfx: fs.readFileSync('./www.littlee.xyz.pfx'),
+      passphrase: ''
+    },
+    app
+  )
+  .listen(443)
